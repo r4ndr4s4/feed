@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { Card as AntdCard } from "antd";
+import placeholder from "./assets/placeholder.svg";
 
 const { Meta } = AntdCard;
 
@@ -17,7 +18,7 @@ export const StyledCard = styled(AntdCard)`
 function Card({ title, description }: { title: string; description: string }) {
   return (
     <StyledCard
-      cover={<img alt="placeholder" src="https://placehold.co/600x400" />}
+      cover={<img alt="placeholder" src={placeholder} />}
       actions={[
         <EyeInvisibleOutlined key="ignore" />,
         <StarOutlined key="save" />,

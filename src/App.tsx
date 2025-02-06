@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Col, Row } from "antd";
 import Card from "./Card";
 import LoadingCard from "./LoadingCard";
@@ -15,24 +15,33 @@ const CARDS = [
 
 function App() {
   const [cards, setCards] = useState(CARDS);
+  const [isLoading, setLoading] = useState(false);
   const observerRef = useRef<HTMLDivElement | null>(null);
+
+  const getCard = useCallback(async () => {
+    const newPos = cards.length + 1;
+
+    const newCard = {
+      id: newPos,
+      title: `Card ${newPos}`,
+      description: "This is the description",
+    };
+
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // TODO remove
+
+    return newCard;
+  }, [cards.length]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      async ([entry]) => {
         if (entry.isIntersecting) {
-          console.log("DEBUG: IntersectionObserver isIntersecting");
+          setLoading(true);
 
-          const newPos = cards.length + 1;
-
-          const newCard = {
-            id: newPos,
-            title: `Card ${newPos}`,
-            description: "This is the description",
-          };
+          const newCard = await getCard();
           setCards((prev) => [...prev, newCard]);
 
-          console.log("DEBUG: IntersectionObserver adding card");
+          setLoading(false);
         }
       },
       { threshold: 1.0 }
@@ -43,7 +52,7 @@ function App() {
     }
 
     return () => observer.disconnect();
-  }, [cards.length]);
+  }, [cards.length, getCard]);
 
   return (
     <>
@@ -53,9 +62,9 @@ function App() {
             return <Card key={id} title={title} description={description} />;
           })}
 
-          <LoadingCard />
-
           <div ref={observerRef}></div>
+
+          {isLoading && <LoadingCard />}
         </Col>
       </Row>
     </>

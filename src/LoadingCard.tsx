@@ -6,18 +6,14 @@ import {
 } from "@ant-design/icons";
 import { Card as AntdCard } from "antd";
 import { StyledCard } from "./Card";
+import placeholder from "./assets/emptyPlaceholder.svg";
 
 const { Meta } = AntdCard;
 
 function LoadingCard() {
   return (
     <StyledCard
-      cover={
-        <img
-          alt="placeholder"
-          src="https://placehold.co/600x400/D3D3D3/D3D3D3"
-        />
-      }
+      cover={<img alt="placeholder" src={placeholder} />}
       actions={[
         <EyeInvisibleOutlined key="ignore" />,
         <StarOutlined key="save" />,
