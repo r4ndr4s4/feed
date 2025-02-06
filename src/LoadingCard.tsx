@@ -1,14 +1,11 @@
 import {
-  CodeOutlined,
   EllipsisOutlined,
   EyeInvisibleOutlined,
   StarOutlined,
 } from "@ant-design/icons";
-import { Card as AntdCard } from "antd";
+import { Skeleton } from "antd";
 import { StyledCard } from "./Card";
 import placeholder from "./assets/emptyPlaceholder.svg";
-
-const { Meta } = AntdCard;
 
 function LoadingCard() {
   return (
@@ -19,9 +16,8 @@ function LoadingCard() {
         <StarOutlined key="save" />,
         <EllipsisOutlined key="ellipsis" />,
       ]}
-      loading
     >
-      <Meta avatar={<CodeOutlined />} />
+      <Skeleton avatar active paragraph={{ rows: 1 }} />
     </StyledCard>
   );
 }

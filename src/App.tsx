@@ -38,10 +38,14 @@ function App() {
         if (entry.isIntersecting && !isLoading) {
           setLoading(true);
 
+          const scrollOffset = window.scrollY; // TODO resolve jumping
+
           const newCard = await getCard();
           setCards((prev) => [...prev, newCard]);
 
           setLoading(false);
+
+          window.scrollTo({ top: scrollOffset, behavior: "instant" });
         }
       },
       { threshold: 1.0 }
