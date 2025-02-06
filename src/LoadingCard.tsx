@@ -4,29 +4,30 @@ import {
   EyeInvisibleOutlined,
   StarOutlined,
 } from "@ant-design/icons";
-import styled from "@emotion/styled";
 import { Card as AntdCard } from "antd";
+import { StyledCard } from "./Card";
 
 const { Meta } = AntdCard;
 
-export const StyledCard = styled(AntdCard)`
-  width: 300px;
-  margin-bottom: 20px;
-`;
-
-function Card({ title, description }: { title: string; description: string }) {
+function LoadingCard() {
   return (
     <StyledCard
-      cover={<img alt="placeholder" src="https://placehold.co/600x400" />}
+      cover={
+        <img
+          alt="placeholder"
+          src="https://placehold.co/600x400/D3D3D3/D3D3D3"
+        />
+      }
       actions={[
         <EyeInvisibleOutlined key="ignore" />,
         <StarOutlined key="save" />,
         <EllipsisOutlined key="ellipsis" />,
       ]}
+      loading
     >
-      <Meta avatar={<CodeOutlined />} title={title} description={description} />
+      <Meta avatar={<CodeOutlined />} />
     </StyledCard>
   );
 }
 
-export default Card;
+export default LoadingCard;

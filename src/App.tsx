@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import Card from "./Card";
+import LoadingCard from "./LoadingCard";
 
 import "./index.css";
 
@@ -19,6 +20,8 @@ function App() {
           {cards.map(({ id, title, description }) => {
             return <Card key={id} title={title} description={description} />;
           })}
+
+          <LoadingCard />
         </Col>
       </Row>
     </>
