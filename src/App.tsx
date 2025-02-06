@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       async ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isLoading) {
           setLoading(true);
 
           const newCard = await getCard();
@@ -52,7 +52,7 @@ function App() {
     }
 
     return () => observer.disconnect();
-  }, [cards.length, getCard]);
+  }, [cards.length, getCard, isLoading]);
 
   return (
     <>
@@ -62,9 +62,9 @@ function App() {
             return <Card key={id} title={title} description={description} />;
           })}
 
-          <div ref={observerRef}></div>
-
           {isLoading && <LoadingCard />}
+
+          <div ref={observerRef}></div>
         </Col>
       </Row>
     </>
