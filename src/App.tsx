@@ -1,9 +1,16 @@
-import { Button } from "antd";
+import { Col, Row } from "antd";
+import Card from "./Card";
+
+import "./index.css";
 
 function App() {
   return (
     <>
-      <Button type="primary">Button</Button>
+      <Row justify="center">
+        <Col span={12}>
+          <Card title="Card title" description="This is the description" />
+        </Col>
+      </Row>
     </>
   );
 }
