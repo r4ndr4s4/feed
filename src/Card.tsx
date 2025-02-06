@@ -11,6 +11,7 @@ const { Meta } = AntdCard;
 
 const StyledCard = styled(AntdCard)`
   width: 300px;
+  margin-bottom: 20px;
 `;
 
 function Card({ title, description }: { title: string; description: string }) {
